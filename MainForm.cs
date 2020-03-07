@@ -54,7 +54,7 @@ namespace Algorithms
                     algorithmsClass.bubble_sort();
                     break;
                 case "Сортировка быстрая":
-                    algorithmsClass.quicksort();
+                    algorithmsClass.quicksort(0, n-1);
                     break;
                 default:
                     break;

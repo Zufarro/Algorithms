@@ -75,9 +75,37 @@ namespace Algorithms
                 }
             }
         }
-        public void quicksort()
+        private int partition(int start, int end)         //Определяет позиции опорного элемента
         {
+            double temp;
+            int marker = start;                                        //граничный элемент правой и левой части массива
+            for (int i = start; i < end; i++)
+            {
+                if (SortedArray[i] < SortedArray[end])                             //array[end] - опорный элемент
+                {
+                    temp = SortedArray[marker];                                   // swap
+                    SortedArray[marker] = SortedArray[i];
+                    SortedArray[i] = temp;
+                    marker++;
+                }
+            }
+            //опорный элемент (array[end]) разместить между правой и левой частями массива
+            temp = SortedArray[marker];
+            SortedArray[marker] = SortedArray[end];
+            SortedArray[end] = temp;
+            return marker;
+        }
 
+
+        public void quicksort(int start, int end)
+        {
+            if (start >= end)
+            {
+                return;
+            }
+            int pivot = partition(start, end);
+            quicksort(start, pivot - 1);
+            quicksort(pivot + 1, end);
         }
     }
 
