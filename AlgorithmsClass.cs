@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
+using System.Diagnostics;
 
 namespace Algorithms
 {
     class AlgorithmsClass
     {
         public double[] SortedArray;
+        Stopwatch stopwatch = new Stopwatch();
+        public double Time;
 
         public void CopyArray(double[] InputArray)
         {
-
+            Thread.Sleep(100);
             int n = InputArray.Length;
             SortedArray = new double[n];
             for (int i = 0; i < n; i++)
@@ -21,7 +24,8 @@ namespace Algorithms
             }
         }
         public void Selection_sort()
-        {
+        { 
+            stopwatch.Start();
             int len = SortedArray.Length;
             for (int i = 0; i < len - 1; i++)
             {
@@ -36,10 +40,15 @@ namespace Algorithms
                 double temp = SortedArray[i];
                 SortedArray[i] = SortedArray[min];
                 SortedArray[min] = temp;
+ 
             }
+            stopwatch.Stop();
+            Time = stopwatch.Elapsed.TotalMilliseconds;
+            stopwatch.Reset();
         }
         public void Insertion_sort()
         {
+            stopwatch.Start();
             int len = SortedArray.Length;
             for (int j = 1; j < len; j++)
             {
@@ -52,9 +61,13 @@ namespace Algorithms
                 }
                 SortedArray[i + 1] = temp;
             }
+            stopwatch.Stop();
+            Time = stopwatch.Elapsed.TotalMilliseconds;
+            stopwatch.Reset();
         }
         public void bubble_sort()
         {
+            stopwatch.Start();
             int len = SortedArray.Length;
             for (int j = 0; j < len - 1; j++)
             {
@@ -74,6 +87,9 @@ namespace Algorithms
                     }
                 }
             }
+            stopwatch.Stop();
+            Time = stopwatch.Elapsed.TotalMilliseconds;
+            stopwatch.Reset();
         }
         private int partition(int start, int end)         //Определяет позиции опорного элемента
         {
@@ -99,13 +115,25 @@ namespace Algorithms
 
         public void quicksort(int start, int end)
         {
+            if (start == 0)
+            {
+                stopwatch.Start();
+            }
             if (start >= end)
             {
+                if (stopwatch.Elapsed.TotalMilliseconds != 0)
+                {
+                    stopwatch.Stop();
+                    Time = stopwatch.Elapsed.TotalMilliseconds;
+                    stopwatch.Reset();
+                }
+
                 return;
             }
             int pivot = partition(start, end);
             quicksort(start, pivot - 1);
             quicksort(pivot + 1, end);
+
         }
     }
 
