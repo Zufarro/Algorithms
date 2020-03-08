@@ -23,14 +23,14 @@ namespace Algorithms
                 SortedArray[i] = InputArray[i];
             }
         }
-        public void Selection_sort()
-        { 
+        public void Selection_sort()                                       //Сортирвка выбором
+        {
             stopwatch.Start();
             int len = SortedArray.Length;
             for (int i = 0; i < len - 1; i++)
             {
                 int min = i;
-                for (int j = i + 1; j < len; j++)                        //Поиск минимума
+                for (int j = i + 1; j < len; j++)                          //Поиск минимума
                 {
                     if (SortedArray[min] > SortedArray[j])
                     {
@@ -40,13 +40,13 @@ namespace Algorithms
                 double temp = SortedArray[i];
                 SortedArray[i] = SortedArray[min];
                 SortedArray[min] = temp;
- 
+
             }
             stopwatch.Stop();
             Time = stopwatch.Elapsed.TotalMilliseconds;
             stopwatch.Reset();
         }
-        public void Insertion_sort()
+        public void Insertion_sort()                                        //Сортировка вставками
         {
             stopwatch.Start();
             int len = SortedArray.Length;
@@ -65,47 +65,49 @@ namespace Algorithms
             Time = stopwatch.Elapsed.TotalMilliseconds;
             stopwatch.Reset();
         }
-        public void bubble_sort()
+        public void bubble_sort()                                         //Сортировка перестановками
         {
             stopwatch.Start();
             int len = SortedArray.Length;
             for (int j = 0; j < len - 1; j++)
             {
                 bool F = false;
-                for (int i = 0; i < len-j-1; i++)
+                for (int i = 0; i < len - j - 1; i++)
                 {
-                    if (SortedArray[i] > SortedArray[i+1])
+                    if (SortedArray[i] > SortedArray[i + 1])
                     {
                         double temp = SortedArray[i];
                         SortedArray[i] = SortedArray[i + 1];
                         SortedArray[i + 1] = temp;
                         F = true;
-                        
+
                     }
-                    if (!F) {
-                        break;
-                    }
+
+                }
+                if (!F)
+                {
+                    break;
                 }
             }
             stopwatch.Stop();
             Time = stopwatch.Elapsed.TotalMilliseconds;
             stopwatch.Reset();
         }
-        private int partition(int start, int end)         //Определяет позиции опорного элемента
+        private int partition(int start, int end)                       //Определяет позиции опорного элемента
         {
             double temp;
-            int marker = start;                                        //граничный элемент правой и левой части массива
+            int marker = start;                                         //граничный элемент правой и левой части массива
             for (int i = start; i < end; i++)
             {
-                if (SortedArray[i] < SortedArray[end])                             //array[end] - опорный элемент
+                if (SortedArray[i] < SortedArray[end])                  //array[end] - опорный элемент
                 {
-                    temp = SortedArray[marker];                                   // swap
+                    temp = SortedArray[marker];                         // swap
                     SortedArray[marker] = SortedArray[i];
                     SortedArray[i] = temp;
                     marker++;
                 }
             }
-            //опорный элемент (array[end]) разместить между правой и левой частями массива
+                                                                       //опорный элемент (array[end]) разместить между правой и левой частями массива
             temp = SortedArray[marker];
             SortedArray[marker] = SortedArray[end];
             SortedArray[end] = temp;
@@ -113,7 +115,7 @@ namespace Algorithms
         }
 
 
-        public void quicksort(int start, int end)
+        public void quicksort(int start, int end)                     //Сортировка быстрая
         {
             if (start == 0)
             {
