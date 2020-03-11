@@ -12,10 +12,10 @@ namespace Algorithms
         public double[] SortedArray;
         Stopwatch stopwatch = new Stopwatch();
         public double Time;
+        bool StartTimer = true;
 
         public void CopyArray(double[] InputArray)
         {
-            Thread.Sleep(100);
             int n = InputArray.Length;
             SortedArray = new double[n];
             for (int i = 0; i < n; i++)
@@ -107,20 +107,22 @@ namespace Algorithms
                     marker++;
                 }
             }
-                                                                       //опорный элемент (array[end]) разместить между правой и левой частями массива
+                                                                        //опорный элемент (array[end]) разместить между правой и левой частями массива
             temp = SortedArray[marker];
             SortedArray[marker] = SortedArray[end];
             SortedArray[end] = temp;
             return marker;
         }
 
-
-        public void quicksort(int start, int end)                     //Сортировка быстрая
+        
+        public void quicksort(int start, int end)                       //Сортировка быстрая
         {
-            if (start == 0)
+            if (StartTimer)
             {
                 stopwatch.Start();
+                StartTimer = false;
             }
+
             if (start >= end)
             {
                 if (stopwatch.Elapsed.TotalMilliseconds != 0)
@@ -132,9 +134,9 @@ namespace Algorithms
 
                 return;
             }
-            int pivot = partition(start, end);
-            quicksort(start, pivot - 1);
-            quicksort(pivot + 1, end);
+            int pivot = partition(start, end);                       //Индекс опорного элемента в отсортированном массиве
+            quicksort(start, pivot - 1);                             //Сортируюм левую часть
+            quicksort(pivot + 1, end);                               //Сортируюм правую часть
 
         }
     }
